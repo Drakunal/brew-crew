@@ -1,6 +1,7 @@
 import 'package:brew_crew/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:brew_crew/models/user.dart' as u;
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class _SignInState extends State<SignIn> {
                   print("error signing in...");
                 } else {
                   print("Signed in...");
-                  print(result);
+                  print(result.uId);
                 }
               },
               child: Text("Sign in anonymously")),
