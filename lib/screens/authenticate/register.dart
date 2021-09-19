@@ -1,20 +1,16 @@
-import 'package:brew_crew/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:brew_crew/models/user.dart' as u;
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class Register extends StatefulWidget {
+  const Register({Key? key}) : super(key: key);
+  // final AuthService _auth = AuthService();
 
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
-  final AuthService _auth = AuthService();
+class _RegisterState extends State<Register> {
   String _email = '';
   String _password = '';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +18,7 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.brown.shade400,
         elevation: 0,
-        title: Text("Brew Crew"),
+        title: Text("Register to Brew Crew"),
       ),
       body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -50,20 +46,20 @@ class _SignInState extends State<SignIn> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: ElevatedButton(
-                        onPressed: () async {
-                          dynamic result = await _auth.signInAnon();
-                          if (result == null) {
-                            print("error signing in...");
-                          } else {
-                            print("Signed in...");
-                            print(result.uId);
-                          }
-                        },
-                        child: Text("Sign in anonymously")),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  //   child: ElevatedButton(
+                  //       onPressed: () async {
+                  //         dynamic result = await _auth.signInAnon();
+                  //         if (result == null) {
+                  //           print("error signing in...");
+                  //         } else {
+                  //           print("Signed in...");
+                  //           print(result.uId);
+                  //         }
+                  //       },
+                  //       child: Text("Sign in anonymously")),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: ElevatedButton(
@@ -71,7 +67,7 @@ class _SignInState extends State<SignIn> {
                           print(
                               "Email is $_email and the password is $_password");
                         },
-                        child: Text("Sign in")),
+                        child: Text("Register")),
                   )
                 ],
               ),
