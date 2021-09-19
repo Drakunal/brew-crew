@@ -5,8 +5,9 @@ import 'package:firebase_core/firebase_core.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  u.User? _userFromFirebaseUser(User user) {
+  u.User? _userFromFirebaseUser(User? user) {
     if (user != null) {
+      print("User id from if is ${user.uid}");
       return u.User(uId: user.uid);
     } else {
       return null;
@@ -14,17 +15,35 @@ class AuthService {
   }
 
   //auth change user stream
-  Stream<u.User?> get user {
-    return _auth
-        .authStateChanges()
-        .map((User? user) => _userFromFirebaseUser(user!));
+  Stream<u.User?>? get user {
+    User? user;
+    if (user != null) {
+      return _auth
+          .authStateChanges()
+          .map((user) => _userFromFirebaseUser(user!));
+    } else {
+      return null;
+    }
+    // return _auth
+    //     .authStateChanges()
+    //     .map((User? user) => _userFromFirebaseUser(user!));
   }
 
   Future signInAnon() async {
     try {
       UserCredential result = await _auth.signInAnonymously();
       User? user = result.user;
+      print("Hello");
       return _userFromFirebaseUser(user!);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
     } catch (e) {
       print(e.toString());
       return null;
