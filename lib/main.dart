@@ -15,7 +15,7 @@ import 'package:brew_crew/models/user.dart' as u;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(StreamProvider<u.User?>.value(
+  runApp(StreamProvider<User?>.value(
       value: AuthService().user,
       initialData: null,
       child: MaterialApp(home: Wrapper())));

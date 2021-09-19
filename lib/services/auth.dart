@@ -5,25 +5,23 @@ import 'package:firebase_core/firebase_core.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  u.User? _userFromFirebaseUser(User? user) {
-    if (user != null) {
-      print("User id from if is ${user.uid}");
-      return u.User(uId: user.uid);
-    } else {
-      return null;
-    }
+  u.User _userFromFirebaseUser(User user) {
+    // if (user != null) {
+    print("User id from if is ${user.uid}");
+    return u.User(uId: user.uid);
+    // } else {
+    //   return null;
+    // }
   }
 
   //auth change user stream
-  Stream<u.User?>? get user {
-    User? user;
-    if (user != null) {
-      return _auth
-          .authStateChanges()
-          .map((user) => _userFromFirebaseUser(user!));
-    } else {
-      return null;
-    }
+  Stream<User?> get user {
+    // User user;
+    // if (user != null) {
+    return _auth.authStateChanges();
+    // } else {
+    //   return null;
+    // }
     // return _auth
     //     .authStateChanges()
     //     .map((User? user) => _userFromFirebaseUser(user!));
