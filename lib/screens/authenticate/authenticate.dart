@@ -10,10 +10,25 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
+  bool isRegister = true;
+  void toggle() {
+    print("Reached");
+    setState(() {
+      isRegister = !isRegister;
+      print("Changing");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Register(),
-    );
+    if (isRegister) {
+      return Container(
+        child: Register(toggleFunctionName: toggle),
+      );
+    } else {
+      return Container(
+        child: SignIn(toggleFunctionName: toggle),
+      );
+    }
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'authenticate.dart';
 
 class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
-  // final AuthService _auth = AuthService();
+  const Register({Key? key, required this.toggleFunctionName})
+      : super(key: key);
+  final Function toggleFunctionName;
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -19,9 +21,24 @@ class _RegisterState extends State<Register> {
         backgroundColor: Colors.brown.shade400,
         elevation: 0,
         title: Text("Register to Brew Crew"),
+        actions: [
+          TextButton.icon(
+              style: ElevatedButton.styleFrom(
+                  // primary: Colors.white,
+
+                  ),
+              onPressed: () {
+                widget.toggleFunctionName();
+                print("pressed");
+              },
+              icon: Icon(Icons.login, color: Colors.white),
+              label: Text(" Login",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold))),
+        ],
       ),
       body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(50.0),
           child: Form(
               child: Column(
             children: [

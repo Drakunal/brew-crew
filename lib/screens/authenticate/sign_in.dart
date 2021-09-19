@@ -4,7 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:brew_crew/models/user.dart' as u;
 
 class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+  const SignIn({Key? key, required this.toggleFunctionName}) : super(key: key);
+  final Function toggleFunctionName;
 
   @override
   _SignInState createState() => _SignInState();
@@ -23,6 +24,20 @@ class _SignInState extends State<SignIn> {
         backgroundColor: Colors.brown.shade400,
         elevation: 0,
         title: Text("Brew Crew"),
+        actions: [
+          TextButton.icon(
+              style: ElevatedButton.styleFrom(
+                  // primary: Colors.white,
+
+                  ),
+              onPressed: () {
+                widget.toggleFunctionName();
+              },
+              icon: Icon(Icons.login, color: Colors.white),
+              label: Text(" Register",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold))),
+        ],
       ),
       body: Padding(
           padding: const EdgeInsets.all(16.0),
