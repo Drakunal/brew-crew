@@ -1,5 +1,9 @@
 import 'package:brew_crew/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+import 'package:brew_crew/services/database.dart';
+import 'package:brew_crew/screens/home/brew_list.dart';
 
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();
@@ -7,46 +11,38 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.brown.shade100,
-      appBar: AppBar(
-        backgroundColor: Colors.brown.shade400,
-        elevation: 0,
-        title: Text("Brew Crew"),
-        actions: [
-          TextButton(
-              onPressed: () async {
-                await _auth.signOut();
-              },
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ),
-                  Text(
-                    " Logout",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ))
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Container(
-            // child: ElevatedButton(
-            //     onPressed: () async {
-            //       dynamic result = await _auth.signInAnon();
-            //       if (result == null) {
-            //         print("error signing in...");
-            //       } else {
-            //         print("Signed in...");
-            //         print(result.uId);
-            //       }
-            //     },
-            //     child: Text("Sign in anonymously")),
-            ),
+    return StreamProvider<QuerySnapshot?>.value(
+      initialData: null,
+      value: DatabaseService(uid: 'uid').brews,
+      child: Scaffold(
+        backgroundColor: Colors.brown.shade100,
+        appBar: AppBar(
+          backgroundColor: Colors.brown.shade400,
+          elevation: 0,
+          title: Text("Brew Crew"),
+          actions: [
+            TextButton(
+                onPressed: () async {
+                  await _auth.signOut();
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      " Logout",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ))
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: BrewList(),
+        ),
       ),
     );
   }

@@ -15,4 +15,8 @@ class DatabaseService {
         .doc(uid)
         .set({'sugar': sugar, 'name': name, 'strength': strength});
   }
+
+  Stream<QuerySnapshot> get brews {
+    return brewCollection.snapshots();
+  }
 }
