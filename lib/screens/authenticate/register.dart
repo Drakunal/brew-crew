@@ -46,6 +46,8 @@ class _RegisterState extends State<Register> {
                 children: [
                   SizedBox(height: 50),
                   TextFormField(
+                    validator: (value) =>
+                        value!.isEmpty ? 'Enter an email address' : null,
                     onChanged: (value) {
                       setState(() {
                         _email = value;
@@ -54,6 +56,9 @@ class _RegisterState extends State<Register> {
                   ),
                   SizedBox(height: 25),
                   TextFormField(
+                    validator: (value) => value!.length < 6
+                        ? 'Enter a password greater than 6 characters'
+                        : null,
                     onChanged: (value) {
                       setState(() {
                         _password = value;
@@ -83,8 +88,10 @@ class _RegisterState extends State<Register> {
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: ElevatedButton(
                             onPressed: () async {
-                              print(
-                                  "Email is $_email and the password is $_password");
+                              if (_formKey.currentState!.validate()) {
+                                print(
+                                    "Email is $_email and the password is $_password");
+                              }
                             },
                             child: Text("Register")),
                       )
