@@ -13,6 +13,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   String _email = '';
   String _password = '';
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,56 +41,57 @@ class _RegisterState extends State<Register> {
       body: Padding(
           padding: const EdgeInsets.all(50.0),
           child: Form(
+              key: _formKey,
               child: Column(
-            children: [
-              SizedBox(height: 50),
-              TextFormField(
-                onChanged: (value) {
-                  setState(() {
-                    _email = value;
-                  });
-                },
-              ),
-              SizedBox(height: 25),
-              TextFormField(
-                onChanged: (value) {
-                  setState(() {
-                    _password = value;
-                  });
-                },
-                obscureText: true,
-              ),
-              SizedBox(height: 25),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  //   child: ElevatedButton(
-                  //       onPressed: () async {
-                  //         dynamic result = await _auth.signInAnon();
-                  //         if (result == null) {
-                  //           print("error signing in...");
-                  //         } else {
-                  //           print("Signed in...");
-                  //           print(result.uId);
-                  //         }
-                  //       },
-                  //       child: Text("Sign in anonymously")),
-                  // ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: ElevatedButton(
-                        onPressed: () async {
-                          print(
-                              "Email is $_email and the password is $_password");
-                        },
-                        child: Text("Register")),
-                  )
+                  SizedBox(height: 50),
+                  TextFormField(
+                    onChanged: (value) {
+                      setState(() {
+                        _email = value;
+                      });
+                    },
+                  ),
+                  SizedBox(height: 25),
+                  TextFormField(
+                    onChanged: (value) {
+                      setState(() {
+                        _password = value;
+                      });
+                    },
+                    obscureText: true,
+                  ),
+                  SizedBox(height: 25),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      //   child: ElevatedButton(
+                      //       onPressed: () async {
+                      //         dynamic result = await _auth.signInAnon();
+                      //         if (result == null) {
+                      //           print("error signing in...");
+                      //         } else {
+                      //           print("Signed in...");
+                      //           print(result.uId);
+                      //         }
+                      //       },
+                      //       child: Text("Sign in anonymously")),
+                      // ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: ElevatedButton(
+                            onPressed: () async {
+                              print(
+                                  "Email is $_email and the password is $_password");
+                            },
+                            child: Text("Register")),
+                      )
+                    ],
+                  ),
                 ],
-              ),
-            ],
-          ))
+              ))
           // child: Container(
           //   child: ElevatedButton(
           //       onPressed: () async {
