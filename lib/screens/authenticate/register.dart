@@ -1,3 +1,5 @@
+import 'package:brew_crew/services/auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'authenticate.dart';
 
@@ -11,8 +13,10 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final AuthService _auth = AuthService();
   String _email = '';
   String _password = '';
+  String _error = '';
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -89,14 +93,30 @@ class _RegisterState extends State<Register> {
                         child: ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
+                                dynamic result =
+                                    _auth.registerWithEmailAndPassword(
+                                        _email, _password);
+                                // if (result == null) {
+                                setState(() {
+                                  _error = 'Please enter a valid email.';
+                                });
+                                // }
                                 print(
                                     "Email is $_email and the password is $_password");
                               }
                             },
-                            child: Text("Register")),
-                      )
+                            child: Text(
+                              "Register",
+                            )),
+                      ),
                     ],
                   ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Text(_error,
+                      style: TextStyle(
+                          color: Colors.red, fontWeight: FontWeight.bold)),
                 ],
               ))
           // child: Container(
