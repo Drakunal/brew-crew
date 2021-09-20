@@ -1,4 +1,5 @@
 import 'package:brew_crew/services/auth.dart';
+import 'package:brew_crew/shared/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:brew_crew/models/user.dart' as u;
@@ -49,6 +50,9 @@ class _SignInState extends State<SignIn> {
                 children: [
                   SizedBox(height: 50),
                   TextFormField(
+                    decoration: textInputDecoration.copyWith(
+                      hintText: 'Email',
+                    ),
                     validator: (value) =>
                         value!.isEmpty ? 'Enter an email' : null,
                     onChanged: (value) {
@@ -59,6 +63,9 @@ class _SignInState extends State<SignIn> {
                   ),
                   SizedBox(height: 25),
                   TextFormField(
+                    decoration: textInputDecoration.copyWith(
+                      hintText: 'Password',
+                    ),
                     validator: (value) => value!.length < 6
                         ? 'Enter a password of atleast 6 characters'
                         : null,
