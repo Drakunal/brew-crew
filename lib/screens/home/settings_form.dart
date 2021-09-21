@@ -33,6 +33,7 @@ class _UserSettingsState extends State<UserSettings> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             UserData? userData = snapshot.data;
+            // _currentStrength = userData!.strength ?? 100;
             return Form(
               key: _formKey,
               child: Column(
@@ -57,7 +58,7 @@ class _UserSettingsState extends State<UserSettings> {
                   ),
                   DropdownButtonFormField(
                     decoration: textInputDecoration,
-                    value: _currentSugar,
+                    value: userData.sugar ?? _currentSugar,
                     items: sugars.map((sugar) {
                       return DropdownMenuItem(
                         value: sugar,
@@ -76,7 +77,7 @@ class _UserSettingsState extends State<UserSettings> {
                       min: 100,
                       max: 900,
                       divisions: 8,
-                      value: (_currentStrength ?? 100).toDouble(),
+                      value: (_currentStrength).toDouble(),
                       onChanged: (value) {
                         setState(() {
                           _currentStrength = value.round();
