@@ -34,33 +34,36 @@ class _BrewListState extends State<BrewList> {
     return ListView.builder(
         itemCount: len,
         itemBuilder: (context, index) {
-          return Card(
-            elevation: 4.5,
-            shadowColor: Colors.brown,
-            color: Colors.brown[100],
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Colors.brown[brews![index].strength],
-                backgroundImage: AssetImage(
-                  'assets/tea.png',
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: 4.5,
+              shadowColor: Colors.black,
+              color: Colors.brown[100],
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.brown[brews![index].strength],
+                  backgroundImage: AssetImage(
+                    'assets/tea.png',
+                  ),
+                  radius: 30,
                 ),
-                radius: 30,
+                title: Text(brews![index].name),
+                // title: Text(brews.docs[index]['strength'].toString()),
+                subtitle: Text("Takes ${brews![index].sugar} spoons of sugar"),
+                // trailing: const Text("..."),
+                onTap: () {
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => MovieListViewDetails(
+                  //               movieName: movieList.elementAt(index).title,
+                  //               movie: movieList[index],
+                  //             )));
+                },
+                // onTap: () =>
+                //     debugPrint("The movie name is ${movies.elementAt(index)}"),
               ),
-              title: Text(brews![index].name),
-              // title: Text(brews.docs[index]['strength'].toString()),
-              subtitle: Text("Takes ${brews![index].sugar} sugar"),
-              // trailing: const Text("..."),
-              onTap: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => MovieListViewDetails(
-                //               movieName: movieList.elementAt(index).title,
-                //               movie: movieList[index],
-                //             )));
-              },
-              // onTap: () =>
-              //     debugPrint("The movie name is ${movies.elementAt(index)}"),
             ),
           );
         });
