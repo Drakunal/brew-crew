@@ -12,6 +12,17 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _showSettings() {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              padding: EdgeInsets.all(20),
+              child: Text("Bottom Sheet"),
+            );
+          });
+    }
+
     return StreamProvider<List<Brew>?>.value(
       initialData: null,
       value: DatabaseService(uid: 'uid').brews,
@@ -39,7 +50,9 @@ class Home extends StatelessWidget {
                   ],
                 )),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                _showSettings();
+              },
               child: Row(
                 children: [
                   Icon(
