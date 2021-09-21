@@ -47,7 +47,7 @@ class _SignInState extends State<SignIn> {
               ],
             ),
             body: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(50.0),
                 child: Form(
                     key: _formKey,
                     child: Column(
@@ -81,30 +81,12 @@ class _SignInState extends State<SignIn> {
                           obscureText: true,
                         ),
                         SizedBox(height: 25),
-                        Row(
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: ElevatedButton(
-                                  onPressed: () async {
-                                    setState(() {
-                                      loading = true;
-                                    });
-                                    dynamic result = await _auth.signInAnon();
-                                    if (result == null) {
-                                      print("error signing in...");
-                                    } else {
-                                      print("Signed in...");
-                                      print(result.uId);
-                                    }
-                                  },
-                                  child: Text("Sign in anonymously")),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                                  const EdgeInsets.symmetric(vertical: 18.0),
                               child: ElevatedButton(
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
@@ -126,7 +108,25 @@ class _SignInState extends State<SignIn> {
                                     }
                                   },
                                   child: Text("Sign in")),
-                            )
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 18.0),
+                              child: ElevatedButton(
+                                  onPressed: () async {
+                                    setState(() {
+                                      loading = true;
+                                    });
+                                    dynamic result = await _auth.signInAnon();
+                                    if (result == null) {
+                                      print("error signing in...");
+                                    } else {
+                                      print("Signed in...");
+                                      print(result.uId);
+                                    }
+                                  },
+                                  child: Text("Sign in anonymously")),
+                            ),
                           ],
                         ),
                         SizedBox(
