@@ -16,7 +16,7 @@ class _UserSettingsState extends State<UserSettings> {
   final _formKey = GlobalKey<FormState>();
   final List<String> sugars = ['0', '1', '2', '3', '4'];
   String _currentName = '';
-  String _currentSugar = '0';
+  String _currentSugar = '-1';
   int _currentStrength = 100;
   @override
   Widget build(BuildContext context) {
@@ -84,7 +84,19 @@ class _UserSettingsState extends State<UserSettings> {
                         });
                       }),
                   ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          if (_currentName == '') {
+                            _currentName = userData.name;
+                          }
+                          if (_currentSugar == '-1') {
+                            _currentSugar = userData.sugar;
+                          }
+                          await DatabaseService(uid: uid).updateUserData(
+                              _currentSugar, _currentName, _currentStrength);
+                          Navigator.pop(context);
+                        }
+
                         print(_currentName);
                         print(_currentSugar);
                         print(_currentStrength);
