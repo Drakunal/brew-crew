@@ -1,5 +1,9 @@
+import 'package:brew_crew/models/user.dart';
+import 'package:brew_crew/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:brew_crew/shared/constant.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserSettings extends StatefulWidget {
   const UserSettings({Key? key}) : super(key: key);
@@ -16,61 +20,137 @@ class _UserSettingsState extends State<UserSettings> {
   int _currentStrength = 100;
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          Text("Update"),
-          SizedBox(
-            height: 10,
-          ),
-          TextFormField(
-            decoration: textInputDecoration.copyWith(
-              hintText: 'Name',
-            ),
-            validator: (value) => value!.isEmpty ? 'Enter a name' : null,
-            onChanged: (value) {
-              setState(() {
-                _currentName = value;
-              });
-            },
-          ),
-          DropdownButtonFormField(
-            decoration: textInputDecoration,
-            value: _currentSugar ?? '0',
-            items: sugars.map((sugar) {
-              return DropdownMenuItem(
-                value: sugar,
-                child: Text("$sugar Sugars"),
-              );
-            }).toList(),
-            onChanged: (value) {
-              setState(() {
-                _currentSugar = value.toString();
-              });
-            },
-          ),
-          Slider(
-              activeColor: Colors.brown[_currentStrength],
-              inactiveColor: Colors.grey,
-              min: 100,
-              max: 900,
-              divisions: 8,
-              value: (_currentStrength ?? 100).toDouble(),
-              onChanged: (value) {
-                setState(() {
-                  _currentStrength = value.round();
-                });
-              }),
-          ElevatedButton(
-              onPressed: () {
-                print(_currentName);
-                print(_currentSugar);
-                print(_currentStrength);
-              },
-              child: Text("Update"))
-        ],
-      ),
-    );
+    final User user = Provider.of<User>(context);
+    var uid;
+    if (user == null) {
+      uid = "Null Uid is being sent";
+    } else {
+      uid = user.uid;
+    }
+
+    return StreamBuilder<UserData>(
+        stream: DatabaseService(uid: uid).userData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            UserData? userData = snapshot.data;
+            return Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Text("Update"),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    initialValue: userData!.name,
+                    decoration: textInputDecoration.copyWith(
+                      hintText: 'Name',
+                    ),
+                    validator: (value) =>
+                        value!.isEmpty ? 'Enter a name' : null,
+                    onChanged: (value) {
+                      setState(() {
+                        _currentName = value;
+                      });
+                    },
+                  ),
+                  DropdownButtonFormField(
+                    decoration: textInputDecoration,
+                    value: _currentSugar,
+                    items: sugars.map((sugar) {
+                      return DropdownMenuItem(
+                        value: sugar,
+                        child: Text("$sugar Sugars"),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _currentSugar = value.toString();
+                      });
+                    },
+                  ),
+                  Slider(
+                      activeColor: Colors.brown[_currentStrength],
+                      inactiveColor: Colors.grey,
+                      min: 100,
+                      max: 900,
+                      divisions: 8,
+                      value: (_currentStrength ?? 100).toDouble(),
+                      onChanged: (value) {
+                        setState(() {
+                          _currentStrength = value.round();
+                        });
+                      }),
+                  ElevatedButton(
+                      onPressed: () {
+                        print(_currentName);
+                        print(_currentSugar);
+                        print(_currentStrength);
+                      },
+                      child: Text("Update"))
+                ],
+              ),
+            );
+          } else {
+            return Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Text("Update with else part"),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    // initialValue: userData!.name,
+                    decoration: textInputDecoration.copyWith(
+                      hintText: 'Name',
+                    ),
+                    validator: (value) =>
+                        value!.isEmpty ? 'Enter a name' : null,
+                    onChanged: (value) {
+                      setState(() {
+                        _currentName = value;
+                      });
+                    },
+                  ),
+                  DropdownButtonFormField(
+                    decoration: textInputDecoration,
+                    value: _currentSugar,
+                    items: sugars.map((sugar) {
+                      return DropdownMenuItem(
+                        value: sugar,
+                        child: Text("$sugar Sugars"),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _currentSugar = value.toString();
+                      });
+                    },
+                  ),
+                  Slider(
+                      activeColor: Colors.brown[_currentStrength],
+                      inactiveColor: Colors.grey,
+                      min: 100,
+                      max: 900,
+                      divisions: 8,
+                      value: (_currentStrength ?? 100).toDouble(),
+                      onChanged: (value) {
+                        setState(() {
+                          _currentStrength = value.round();
+                        });
+                      }),
+                  ElevatedButton(
+                      onPressed: () {
+                        print(_currentName);
+                        print(_currentSugar);
+                        print(_currentStrength);
+                      },
+                      child: Text("Update"))
+                ],
+              ),
+            );
+          }
+        });
   }
 }
