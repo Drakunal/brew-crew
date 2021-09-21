@@ -13,7 +13,7 @@ class _UserSettingsState extends State<UserSettings> {
   final List<String> sugars = ['0', '1', '2', '3', '4'];
   String _currentName = '';
   String _currentSugar = '0';
-  int strength = 0;
+  int _currentStrength = 100;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -50,10 +50,23 @@ class _UserSettingsState extends State<UserSettings> {
               });
             },
           ),
+          Slider(
+              activeColor: Colors.brown[_currentStrength],
+              inactiveColor: Colors.grey,
+              min: 100,
+              max: 900,
+              divisions: 8,
+              value: (_currentStrength ?? 100).toDouble(),
+              onChanged: (value) {
+                setState(() {
+                  _currentStrength = value.round();
+                });
+              }),
           ElevatedButton(
               onPressed: () {
                 print(_currentName);
                 print(_currentSugar);
+                print(_currentStrength);
               },
               child: Text("Update"))
         ],
