@@ -124,6 +124,9 @@ class _SignInState extends State<SignIn> {
                                       print("Signed in...");
                                       print(result.uId);
                                     }
+                                    setState(() {
+                                      loading = false;
+                                    });
                                   },
                                   child: Text("Sign in anonymously")),
                             ),
