@@ -106,7 +106,9 @@ class _UserSettingsState extends State<UserSettings> {
               ),
             );
           } else {
-            return Container();
+            return Container(
+              child: Text("Login with valid Credentials to access this tab!"),
+            );
             // return Form(
             //   key: _formKey,
             //   child: Column(
