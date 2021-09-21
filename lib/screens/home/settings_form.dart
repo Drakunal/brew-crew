@@ -37,12 +37,13 @@ class _UserSettingsState extends State<UserSettings> {
               key: _formKey,
               child: Column(
                 children: [
-                  Text("Update"),
+                  Text("If Update"),
                   SizedBox(
                     height: 10,
                   ),
                   TextFormField(
                     initialValue: userData!.name,
+                    // userData!.name
                     decoration: textInputDecoration.copyWith(
                       hintText: 'Name',
                     ),
@@ -87,69 +88,70 @@ class _UserSettingsState extends State<UserSettings> {
                         print(_currentSugar);
                         print(_currentStrength);
                       },
-                      child: Text("Update"))
+                      child: Text("If Update"))
                 ],
               ),
             );
           } else {
-            return Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  Text("Update with else part"),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    // initialValue: userData!.name,
-                    decoration: textInputDecoration.copyWith(
-                      hintText: 'Name',
-                    ),
-                    validator: (value) =>
-                        value!.isEmpty ? 'Enter a name' : null,
-                    onChanged: (value) {
-                      setState(() {
-                        _currentName = value;
-                      });
-                    },
-                  ),
-                  DropdownButtonFormField(
-                    decoration: textInputDecoration,
-                    value: _currentSugar,
-                    items: sugars.map((sugar) {
-                      return DropdownMenuItem(
-                        value: sugar,
-                        child: Text("$sugar Sugars"),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _currentSugar = value.toString();
-                      });
-                    },
-                  ),
-                  Slider(
-                      activeColor: Colors.brown[_currentStrength],
-                      inactiveColor: Colors.grey,
-                      min: 100,
-                      max: 900,
-                      divisions: 8,
-                      value: (_currentStrength ?? 100).toDouble(),
-                      onChanged: (value) {
-                        setState(() {
-                          _currentStrength = value.round();
-                        });
-                      }),
-                  ElevatedButton(
-                      onPressed: () {
-                        print(_currentName);
-                        print(_currentSugar);
-                        print(_currentStrength);
-                      },
-                      child: Text("Update"))
-                ],
-              ),
-            );
+            return Container();
+            // return Form(
+            //   key: _formKey,
+            //   child: Column(
+            //     children: [
+            //       const Text("Else Update"),
+            //       SizedBox(
+            //         height: 10,
+            //       ),
+            //       TextFormField(
+            //         initialValue: "Else part",
+            //         decoration: textInputDecoration.copyWith(
+            //           hintText: 'Name',
+            //         ),
+            //         validator: (value) =>
+            //             value!.isEmpty ? 'Enter a name' : null,
+            //         onChanged: (value) {
+            //           setState(() {
+            //             _currentName = value;
+            //           });
+            //         },
+            //       ),
+            //       DropdownButtonFormField(
+            //         decoration: textInputDecoration,
+            //         value: _currentSugar,
+            //         items: sugars.map((sugar) {
+            //           return DropdownMenuItem(
+            //             value: sugar,
+            //             child: Text("$sugar Sugars"),
+            //           );
+            //         }).toList(),
+            //         onChanged: (value) {
+            //           setState(() {
+            //             _currentSugar = value.toString();
+            //           });
+            //         },
+            //       ),
+            //       Slider(
+            //           activeColor: Colors.brown[_currentStrength],
+            //           inactiveColor: Colors.grey,
+            //           min: 100,
+            //           max: 900,
+            //           divisions: 8,
+            //           value: (_currentStrength ?? 100).toDouble(),
+            //           onChanged: (value) {
+            //             setState(() {
+            //               _currentStrength = value.round();
+            //             });
+            //           }),
+            //       ElevatedButton(
+            //           onPressed: () {
+            //             print(_currentName);
+            //             print(_currentSugar);
+            //             print(_currentStrength);
+            //           },
+            //           child: Text("Else Update"))
+            //     ],
+            //   ),
+            // );
           }
         });
   }
