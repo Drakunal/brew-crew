@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:brew_crew/models/brew.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
