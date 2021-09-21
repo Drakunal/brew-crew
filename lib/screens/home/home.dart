@@ -32,7 +32,7 @@ class Home extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.brown.shade400,
           elevation: 0,
-          title: Text("Brew Crew"),
+          title: Text("Tea Family"),
           actions: [
             TextButton(
                 onPressed: () async {
