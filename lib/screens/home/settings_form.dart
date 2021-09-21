@@ -11,8 +11,8 @@ class UserSettings extends StatefulWidget {
 class _UserSettingsState extends State<UserSettings> {
   final _formKey = GlobalKey<FormState>();
   final List<String> sugars = ['0', '1', '2', '3', '4'];
-  String _name = '';
-  String _sugar = '0';
+  String _currentName = '';
+  String _currentSugar = '0';
   int strength = 0;
   @override
   Widget build(BuildContext context) {
@@ -31,24 +31,29 @@ class _UserSettingsState extends State<UserSettings> {
             validator: (value) => value!.isEmpty ? 'Enter a name' : null,
             onChanged: (value) {
               setState(() {
-                _name = value;
+                _currentName = value;
               });
             },
           ),
-          TextFormField(
-            decoration: textInputDecoration.copyWith(
-              hintText: 'Sugars',
-            ),
-            validator: (value) => value!.isEmpty ? 'Enter Sugar value' : null,
+          DropdownButtonFormField(
+            decoration: textInputDecoration,
+            value: _currentSugar ?? '0',
+            items: sugars.map((sugar) {
+              return DropdownMenuItem(
+                value: sugar,
+                child: Text("$sugar Sugars"),
+              );
+            }).toList(),
             onChanged: (value) {
               setState(() {
-                _sugar = value;
+                _currentSugar = value.toString();
               });
             },
           ),
           ElevatedButton(
               onPressed: () {
-                print(_name);
+                print(_currentName);
+                print(_currentSugar);
               },
               child: Text("Update"))
         ],
