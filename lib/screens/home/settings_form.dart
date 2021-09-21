@@ -62,7 +62,7 @@ class _UserSettingsState extends State<UserSettings> {
                     items: sugars.map((sugar) {
                       return DropdownMenuItem(
                         value: sugar,
-                        child: Text("$sugar Sugars"),
+                        child: Text("$sugar spoons of sugar"),
                       );
                     }).toList(),
                     onChanged: (value) {
