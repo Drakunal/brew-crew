@@ -37,7 +37,19 @@ class Home extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     ),
                   ],
-                ))
+                )),
+            TextButton(
+              onPressed: () {},
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.settings,
+                    color: Colors.white,
+                  ),
+                  Text("Setting", style: TextStyle(color: Colors.white)),
+                ],
+              ),
+            )
           ],
         ),
         body: Padding(
