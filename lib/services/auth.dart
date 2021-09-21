@@ -1,4 +1,4 @@
-import 'package:brew_crew/models/user.dart' as u;
+import 'package:brew_crew/models/user.dart';
 import 'package:brew_crew/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,10 +6,10 @@ import 'package:firebase_core/firebase_core.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  u.User _userFromFirebaseUser(User user) {
+  MUser _userFromFirebaseUser(User user) {
     // if (user != null) {
     print("User id from if is ${user.uid}");
-    return u.User(uId: user.uid);
+    return MUser(uId: user.uid);
     // } else {
     //   return null;
     // }
