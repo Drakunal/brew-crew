@@ -36,21 +36,15 @@ class _BrewListState extends State<BrewList> {
         itemBuilder: (context, index) {
           return Card(
             elevation: 4.5,
-            shadowColor: Colors.black,
-            color: Colors.white,
+            shadowColor: Colors.brown,
+            color: Colors.brown[100],
             child: ListTile(
               leading: CircleAvatar(
                 backgroundColor: Colors.brown[brews![index].strength],
-                child: Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(
-                      // image: DecorationImage(
-                      //     image: NetworkImage(movieList[index].images[0]),
-                      //     fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(20)),
-                  child: null,
+                backgroundImage: AssetImage(
+                  'assets/tea.png',
                 ),
+                radius: 30,
               ),
               title: Text(brews![index].name),
               // title: Text(brews.docs[index]['strength'].toString()),

@@ -66,8 +66,11 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
+        body: Container(
+          // padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/teaa.png'), fit: BoxFit.cover)),
           child: BrewList(),
         ),
       ),
